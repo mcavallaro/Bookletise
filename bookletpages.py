@@ -1,10 +1,12 @@
+import sys
+
 
 def doppioAnagniPanoramic(number):
     '''
     Build the index vector, con doppio Anagni "panoramic"
     '''
-    index1 = range(1, number / 2 + 1)
-    index2 = range(number, number / 2, -1)
+    index1 = range(1, int(number / 2 + 1))
+    index2 = range(number, int(number / 2), -1)
     index = []
     i = 0
     index.append(index2[0])
@@ -25,8 +27,8 @@ def doppioAnagniCrazy(number, pages, max_tmp):
     '''
     Build the index vector, con doppio Anagni "crazy"
     '''
-    index1 = range(1 + max_tmp, number / 2 + 1 + max_tmp)
-    index2 = ['NA' for _ in xrange(number - pages)] + range(pages + max_tmp, number / 2 + max_tmp, -1)
+    index1 = range(1 + max_tmp, int(number / 2 + 1 + max_tmp))
+    index2 = ['NA' for _ in range(number - pages)] + list(range(pages + max_tmp, int(number / 2 + max_tmp), -1))
     index = []
     i = 0
     index.append(index2[0])
@@ -37,10 +39,11 @@ def doppioAnagniCrazy(number, pages, max_tmp):
         i = i + 1
         index.append(index2[i])
         i = i + 1
-        if i >= (number / 2):
+        if i >= int(number / 2):
             break
         index.append(index2[i])
     return index
+
 
 def main(n_pages_booklet, total_pages):
 
@@ -55,24 +58,32 @@ def main(n_pages_booklet, total_pages):
         if lista[n_pages_booklet*i] + n_pages_booklet > total_pages:
             break
 
-    for l in lista:
-        print("%d," % l)
+    sys.stdout.write(str(lista[0]))
+    for l in lista[1:]:
+        sys.stdout.write(",%d" % l)
 
     max_tmp = lista[n_pages_booklet*i]
 
     pages_left = total_pages - max_tmp
 
-    print("\nThere are %d pages left," % pages_left)
+    if pages_left:
 
-    last_group = (pages_left/4)*4 + 4*bool(pages_left%4)
+        sys.stdout.write("\nThere are %d pages left,\n" % pages_left)
 
-    print(" make another booklet of %d pages\n" % last_group)
+        last_group = int(pages_left/4)*4 + 4*bool(pages_left%4)
 
-    last_booklet = doppioAnagniCrazy(last_group, pages_left, max_tmp)
+        sys.stdout.write(" make another booklet of %d pages\n" % last_group)
 
-    for l in last_booklet:
-        print(str(l) + ',')
+        last_booklet = doppioAnagniCrazy(last_group, pages_left, max_tmp)
+
+        sys.stdout.write(str(last_booklet[0]))
+        for l in last_booklet[1:]:
+            sys.stdout.write(',' + str(l))
+
+    sys.stdout.write('\n')
+
 
 if __name__ == '__main__':
-    import sys
+    if len(sys.argv) != 3:
+        sys.exit('Usage: python bookletpages.py n_pages_booklet total_pages')
     main(int(sys.argv[1]), int(sys.argv[2]))
