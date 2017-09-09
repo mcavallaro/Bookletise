@@ -5,7 +5,7 @@ then
     exit $E_BADARGS
 else
     NumberOfPages=$(pdftk $1 dump_data | grep NumberOfPages | sed 's/[^0-9]*//')
-    var=$(python bookletpages.py $3 $NumberOfPages)
+    var=$(python bookletise.py $3 $NumberOfPages)
     pdftk A=$1 B=blank.pdf cat $var output $2
 fi
 

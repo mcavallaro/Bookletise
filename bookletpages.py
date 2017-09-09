@@ -45,7 +45,15 @@ def doppioAnagniCrazy(number, pages, max_tmp):
     return index
 
 
-def main(n_pages_booklet, total_pages):
+def bookletise(n_pages_booklet, total_pages):
+    '''
+    Print the ordered page numbers, to make booklets of `n_pages_booklet' pages,
+    out of a total of 'total_pages' pages.
+    '''
+
+    if (n_pages_booklet % 4):
+        sys.stderr.write('Each booklet block must contain multiple-of-four number of pages.')
+        return
 
     lista_in = doppioAnagniPanoramic(n_pages_booklet)
     lista = lista_in[:]
@@ -85,5 +93,5 @@ def main(n_pages_booklet, total_pages):
 
 if __name__ == '__main__':
     if len(sys.argv) != 3:
-        sys.exit('Usage: python bookletpages.py n_pages_booklet total_pages')
-    main(int(sys.argv[1]), int(sys.argv[2]))
+        sys.exit('Usage: python bookletise.py n_pages_booklet total_pages')
+    bookletise(int(sys.argv[1]), int(sys.argv[2]))
