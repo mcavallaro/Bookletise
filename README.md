@@ -4,7 +4,7 @@
 
 ##  
 
-Some expensive proprietary software, such as [_FinePrint_][1] or [_Adobe InDesign_][2],
+Some expensive proprietary software, such as [_FinePrint_](http://fineprint.com/fp/) or [_Adobe InDesign_][http://www.adobe.com/products/indesign.html],
 can create multi-page documents to be easily printed as books. 
 These typically set four pages on a single sheet, in a way that,
 when you collate, fold, and staple the double-sided sheets, the result is a single book with the appropriate page order.
@@ -55,7 +55,7 @@ print the document pages in the expected order.
 
 
 Alternatively, the script `bookletise.sh` provides a one-liner interface to the python program.
-If the software [_PDFTKtk Server_][3] is installed, then
+If the software [_PDFTKtk Server_](https://www.pdflabs.com/tools/pdftk-server/) is installed, then
 ```{sh}
 sh bookletise.sh input_file.pdf output_file.pdf size_of_booklets
 ```
@@ -77,10 +77,3 @@ You should find a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
-
-
-[1][http://fineprint.com/fp/]
-
-[2][http://www.adobe.com/products/indesign.html]
-
-[3][https://www.pdflabs.com/tools/pdftk-server/]
