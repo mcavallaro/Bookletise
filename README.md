@@ -4,7 +4,7 @@
 
 ##  
 
-Some expensive proprietary software, such as [_FinePrint_](http://fineprint.com/fp/) or [_Adobe InDesign_][http://www.adobe.com/products/indesign.html],
+Some expensive proprietary software, such as [_FinePrint_](http://fineprint.com/fp/) or [_Adobe InDesign_](http://www.adobe.com/products/indesign.html),
 can create multi-page documents to be easily printed as books. 
 These typically set four pages on a single sheet, in a way that,
 when you collate, fold, and staple the double-sided sheets, the result is a single book with the appropriate page order.
