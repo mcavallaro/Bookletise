@@ -73,17 +73,17 @@ def bookletise(n_pages_booklet, total_pages):
 
     max_tmp = lista[n_pages_booklet*i]
 
-    pages_left = total_pages - max_tmp
+    remaining_pages = total_pages - max_tmp
 
-    if pages_left:
+    if remaining_pages:
 
-        sys.stdout.write("\nThere are %d pages left,\n" % pages_left)
+        sys.stdout.write("\nThere are %d pages left,\n" % remaining_pages)
 
-        last_group = int(pages_left/4)*4 + 4*bool(pages_left%4)
+        last_group = int(remaining_pages/4)*4 + 4*bool(remaining_pages%4)
 
         sys.stdout.write(" make another booklet of %d pages\n" % last_group)
 
-        last_booklet = doppioAnagniCrazy(last_group, pages_left, max_tmp)
+        last_booklet = doppioAnagniCrazy(last_group, remaining_pages, max_tmp)
 
         sys.stdout.write(str(last_booklet[0]))
         for l in last_booklet[1:]:

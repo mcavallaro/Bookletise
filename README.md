@@ -1,85 +1,86 @@
-# An exhibit of Markdown
 
-This note demonstrates some of what [Markdown][1] is capable of doing.
-
-*Note: Feel free to play with this page. Unlike regular notes, this doesn't automatically save itself.*
-
-## Basic formatting
-
-Paragraphs can be written like so. A paragraph is the basic block of Markdown. A paragraph is what text will turn into when there is no reason it should become anything else.
-
-Paragraphs must be separated by a blank line. Basic formatting of *italics* and **bold** is supported. This *can be **nested** like* so.
-
-## Lists
-
-### Ordered list
-
-1. Item 1
-2. A second item
-3. Number 3
-4. Ⅳ
-
-*Note: the fourth item uses the Unicode character for [Roman numeral four][2].*
-
-### Unordered list
-
-* An item
-* Another item
-* Yet another item
-* And there's more...
-
-## Paragraph modifiers
-
-### Code block
-
-    Code blocks are very useful for developers and other people who look at code or other things that are written in plain text. As you can see, it uses a fixed-width font.
-
-You can also make `inline code` to add code into other things.
-
-### Quote
-
-> Here is a quote. What this is should be self explanatory. Quotes are automatically indented when they are used.
-
-## Headings
-
-There are six levels of headings. They correspond with the six levels of HTML headings. You've probably noticed them already in the page. Each level down uses one more hash character.
-
-### Headings *can* also contain **formatting**
-
-### They can even contain `inline code`
-
-Of course, demonstrating what headings look like messes up the structure of the page.
-
-I don't recommend using more than three or four levels of headings here, because, when you're smallest heading isn't too small, and you're largest heading isn't too big, and you want each size up to look noticeably larger and more important, there there are only so many sizes that you can use.
-
-## URLs
-
-URLs can be made in a handful of ways:
-
-* A named link to [MarkItDown][3]. The easiest way to do these is to select what you want to make a link and hit `Ctrl+L`.
-* Another named link to [MarkItDown](http://www.markitdown.net/)
-* Sometimes you just want a URL like <http://www.markitdown.net/>.
-
-## Horizontal rule
-
-A horizontal rule is a line that goes across the middle of the page.
-
----
-
-It's sometimes handy for breaking things up.
-
-## Images
-
-Markdown can also contain images. I'll need to add something here sometime.
-
-## Finally
-
-There's actually a lot more to Markdown than this. See the official [introduction][4] and [syntax][5] for more information. However, be aware that this is not using the official implementation, and this might work subtly differently in some of the little things.
+# *Bookletise*. Print a booklet using _any_ pdf printer.
 
 
-  [1]: http://daringfireball.net/projects/markdown/
-  [2]: http://www.fileformat.info/info/unicode/char/2163/index.htm
-  [3]: http://www.markitdown.net/
-  [4]: http://daringfireball.net/projects/markdown/basics
-  [5]: http://daringfireball.net/projects/markdown/syntax
+##  
 
+Some expensive proprietary software, such as [_FinePrint_][1] or [_Adobe InDesign_][2],
+can create multi-page documents to be easily printed as books. 
+These typically set four pages on a single sheet, in a way that,
+when you collate, fold, and staple the double-sided sheets, the result is a single book with the appropriate page order.
+
+
+As an example, let us suppose that we wish to print out a book out of a multi-page document,
+and bind the booklet pages in groups of eigth.
+In this case,  page two must be positioned next to page 7, so that when the two pages are printed on the same sheet,
+folded, and collated, the pages end up in the appropriate order.
+
+*Bookletise* allows you to print any multipage pdf document of any size as a book for free,
+regardless of the software and the operating system that you wish to use to visualise and print the document.
+
+
+
+## Usage
+
+This guide demonstrates what *Bookletise* is capable of doing.
+
+The core program is the python script `bookletise`, which can be deployed in a Python shell with
+```{python}
+>>> from bookletise import *
+>>> bookletise(4, 10)
+```
+```
+4,1,2,3,8,5,6,7
+There are 2 pages left,
+ make another booklet of 4 pages
+NA,9,10,NA
+```
+This called the function to set a book of 10 pages with four-page booklest (of one sheet each).
+The order page numbers are in the first and last line. The warning output, as well a the last line, is only
+showed when a reminder number of pages remain (this occurs when the total number of pages is not multiple of the
+number of pages per booklet).
+
+The `bookletise` function ouputs to the standard output a sequence of pages, ordered in booklets.
+The corrected order is calculated by the doppio-Anagni algorithm.
+The number `size_of_booklets` of page per booket and the total number `number_of_pages`  of pages in the original pdf document must be specified. Obviously, the variable `size_of_booklets` must be multiple of 4,
+but smaller than the total number of pages in the document.
+
+The Python script can be called by the terminal using
+```{sh}
+python bookletise.py number_of_pages size_of_booklets
+```
+
+Copy the output values from the standar error and paste in the `Pages` bor. A click on the `print` button will obviously
+print the document pages in the expected order.
+
+
+Alternatively, the script `bookletise.sh` provides a one-liner interface to the python program.
+If the software [_PDFTKtk Server_][3] is installed, then
+```{sh}
+sh bookletise.sh input_file.pdf output_file.pdf size_of_booklets
+```
+automatically creates an output pdf file ready to be printed as a book.
+
+## Licence
+
+*Bookletise* is free software: you can redistribute it and/or
+modify it under the terms of the GNU General Public License as
+published by the Free Software Foundation, either version 3 of the
+License, or (at your option) any later version.
+
+*Bookletise* is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+General Public License for more details.
+
+You should find a copy of the GNU General Public License
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+
+
+
+[1][http://fineprint.com/fp/]
+
+[2][http://www.adobe.com/products/indesign.html]
+
+[3][https://www.pdflabs.com/tools/pdftk-server/]
